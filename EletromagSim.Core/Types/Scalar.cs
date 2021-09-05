@@ -3,7 +3,7 @@ using System.Linq;
 using System.Numerics;
 namespace EletromagSim.Core.Types
 {
-    public record Scalar
+    public class Scalar
     {
         #region Constructors
         public Scalar() { }
@@ -34,6 +34,12 @@ namespace EletromagSim.Core.Types
         {
             processAndSetValueFromString(value.ToString());
         }
+
+        public Scalar(Scalar s)
+        {
+            DecimalMantissa = s.DecimalMantissa;
+            DecimalExponent = s.DecimalExponent;
+        }
         #endregion
 
         private BigInteger decimalMantissa { get; set; }
@@ -49,7 +55,28 @@ namespace EletromagSim.Core.Types
         public static implicit operator Scalar(double d) => new Scalar(d);
         #endregion
 
-        #region Operations and functions
+        #region Comparisons
+        public static bool operator ==(Scalar s1, Scalar s2)
+        {
+            return s1.DecimalMantissa == s2.DecimalMantissa && s1.DecimalExponent == s2.DecimalExponent;
+        }
+
+        public static bool operator !=(Scalar s1, Scalar s2) => !(s1 == s2);
+
+        public override bool Equals(object obj)
+        {
+            var objType = obj.GetType();
+            if (!objType.Equals(this.GetType()))
+            {
+                return false;
+            }
+            return (Scalar)obj == this;
+        }
+
+        public override int GetHashCode() => base.GetHashCode();
+        #endregion
+
+        #region Operators and functions
         public static Scalar operator *(Scalar s1, Scalar s2)
             => new Scalar
             {
@@ -72,22 +99,29 @@ namespace EletromagSim.Core.Types
 
             return new Scalar(lowerExponentMantissa + greaterExponentMantissa, lowerExponent);
         }
-
-        public static Scalar Pow(Scalar s1, int exp)
-        {
-            var count = 1;
-            var result = (Scalar) s1.MemberwiseClone();
-            while(count < exp)
-            {
-                result *= s1;
-                count++;
-            }
-
-            return result;
-        }
         #endregion
 
         #region String Manipulations
+        public override string ToString()
+        {
+            var mantissaString = DecimalMantissa.ToString();
+            var exponent = DecimalExponent;
+            while (exponent != 0)
+            {
+                if (exponent > 0)
+                {
+                    mantissaString += "0";
+                    exponent--;
+                }
+                else
+                {
+                    mantissaString.Insert(mantissaString.Length - 1 + exponent, ".");
+                    break;
+                }
+            }
+            return mantissaString;
+        }
+
         private void processAndSetValueFromString(string value)
         {
             var clean = value.Where(c => char.IsDigit(c) || c == '.' || c == ',');

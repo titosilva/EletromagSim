@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace EletromagSim.Core.Eletromagnetism
 {
-    public static class GaussLaw
+    public static class CoulombsLaw
     {
-        public static Vector ComputeElectricField(Scalar charge, Vector chargePosition, Vector referencePoint, Scalar permittivity)
+        public static Vector GetElectricFieldAt(Scalar charge, Vector chargePosition, Vector referencePoint, Scalar permittivity)
         {
             throw new NotImplementedException();
         }

@@ -28,8 +28,8 @@ namespace EletromagSim.Core.Types
         public override Scalar DotMultiply(Versor versor)
             => versor.DotMultiply(this);
 
-        public override Scalar DotMultiply(XVersor versor) => 1;
-        public override Scalar DotMultiply(YVersor versor) => 0;
+        public override Scalar DotMultiply(XVersor versor) => 0;
+        public override Scalar DotMultiply(YVersor versor) => 1;
         public override Scalar DotMultiply(ZVersor versor) => 0;
     }
 
@@ -38,8 +38,8 @@ namespace EletromagSim.Core.Types
         public override Scalar DotMultiply(Versor versor)
             => versor.DotMultiply(this);
 
-        public override Scalar DotMultiply(XVersor versor) => 1;
+        public override Scalar DotMultiply(XVersor versor) => 0;
         public override Scalar DotMultiply(YVersor versor) => 0;
-        public override Scalar DotMultiply(ZVersor versor) => 0;
+        public override Scalar DotMultiply(ZVersor versor) => 1;
     }
 }

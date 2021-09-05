@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EletromagSim.Core.Functions.ScalarFunctions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -80,9 +81,9 @@ namespace EletromagSim.Core.Types
         }
 
         public static Scalar Abs(Vector v)
-            => Scalar.Pow(v.Components[0].Value, 2)
-                + Scalar.Pow(v.Components[1].Value, 2)
-                + Scalar.Pow(v.Components[2].Value, 2);
+            => ScalarMath.Pow(v.Components[0].Value, 2)
+                + ScalarMath.Pow(v.Components[1].Value, 2)
+                + ScalarMath.Pow(v.Components[2].Value, 2);
         #endregion
     }
 }

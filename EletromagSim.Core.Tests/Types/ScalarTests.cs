@@ -1,4 +1,6 @@
-﻿using EletromagSim.Core.Types;
+﻿using EletromagSim.Core.Functions;
+using EletromagSim.Core.Functions.ScalarFunctions;
+using EletromagSim.Core.Types;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -73,12 +75,12 @@ namespace EletromagSim.Core.Tests.Types
         public void Power_ShouldComputePowProperly()
         {
             var s1 = new Scalar(0.5);
-            var s2 = Scalar.Pow(s1, 3);
+            var s2 = ScalarMath.Pow(s1, 3);
 
             Assert.AreEqual(s2, 0.125);
 
             s1 = new Scalar(10);
-            s2 = Scalar.Pow(s1, 1);
+            s2 = ScalarMath.Pow(s1, 1);
 
             Assert.AreEqual(s2, 10);
         }
