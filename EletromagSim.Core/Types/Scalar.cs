@@ -124,7 +124,9 @@ namespace EletromagSim.Core.Types
 
         private void processAndSetValueFromString(string value)
         {
-            var clean = value.Where(c => char.IsDigit(c) || c == '.' || c == ',');
+            var clean = value.Where(c => char.IsDigit(c) || c == '.' || c == ',' ||
+                                    ((c == '+' || c == '-') && value.IndexOf(c) == 0)
+                                    );
             if (clean.Count(c => c == '.' || c == ',') > 1)
             {
                 throw new ArgumentException($"The value {value} has more than one '.' or ',' and can't be consistently understood");

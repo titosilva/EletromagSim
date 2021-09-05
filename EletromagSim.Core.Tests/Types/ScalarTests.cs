@@ -72,6 +72,23 @@ namespace EletromagSim.Core.Tests.Types
         }
 
         [TestMethod]
+        public void Scalar_CouldBeNegative()
+        {
+            var s1 = new Scalar(1.3);
+            var s2 = new Scalar(-1.6);
+
+            var s3 = s1 + s2;
+
+            Assert.AreEqual(s3, -0.3);
+
+            s1 = new Scalar("-5");
+            s2 = new Scalar("-9.8");
+
+            s3 = s1 * s2;
+            Assert.AreEqual(s3, 49);
+        }
+
+        [TestMethod]
         public void Power_ShouldComputePowProperly()
         {
             var s1 = new Scalar(0.5);
